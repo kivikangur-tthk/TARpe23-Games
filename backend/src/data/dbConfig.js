@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 const isTest = process.env.NODE_ENV === 'test';
-console.log("isTest:",isTest);
+console.log("isTest:", isTest);
 
 const sequelize = isTest
     ? new Sequelize({
@@ -29,4 +29,4 @@ const sync = (async () => {
     console.log("All models were synchronized.");
 })
 
-export {sequelize, sync};
+export { sequelize, sync };
