@@ -20,3 +20,6 @@ Peale kloonimist minna kloonitud kausta ja käivitada käsk
 Projekti käivitamiseks anda korraldus
 
 `npm run dev`
+
+Projekt töötab ja kuvab veebilehed, millelt saab lehte külastada.
+Lõpetamiseks vajuta klahve CTRL+C
