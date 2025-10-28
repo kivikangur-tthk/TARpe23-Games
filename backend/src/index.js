@@ -3,10 +3,15 @@ import http from 'http';
 import dotenv from 'dotenv';
 import { sync } from './data/dbConfig.js';
 import { userService } from './data/dataServices.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDoc from './docs/swagger.json' with { type: "json" };
+
 dotenv.config();
 
 const app = express();
 const httpServer = http.createServer(app);
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.get('/', async (req, res) => {
     const user = await userService.getUser("Tiit");
