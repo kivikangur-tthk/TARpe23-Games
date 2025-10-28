@@ -1,4 +1,5 @@
 {
+    "swagger": "2.0",
     "info": {
         "title": "Games API",
         "version": "1.0",
@@ -7,38 +8,58 @@
     "basePath": "/api/v1",
     "paths": {
         "/games": {
-            "summary": "Games endpoint",
-            "description": "Get, Create, Delete or update Games object\n",
             "get": {
+                "produces": [
+                    "application/json"
+                ],
                 "tags": [
                     "Games"
                 ],
                 "responses": {
                     "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
-                                },
-                                "examples": {
-                                    "List of games": {
-                                        "value": [
-                                            "Witcher 3",
-                                            "Cyberpunk 2077"
-                                        ]
-                                    }
-                                }
+                        "description": "List of games",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/GamesListItem"
                             }
                         },
-                        "description": "Return list of all Games"
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": 5,
+                                    "name": "some text"
+                                },
+                                {
+                                    "id": 93,
+                                    "name": "some text"
+                                }
+                            ]
+                        }
                     }
                 },
                 "summary": "Get all games"
             }
         }
     },
-    "swagger": "2.0"
+    "definitions": {
+        "GamesListItem": {
+            "title": "Root Type for GamesListItem",
+            "description": "",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "id": 1,
+                "name": "Minecraft"
+            }
+        }
+    }
 }
