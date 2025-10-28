@@ -39,7 +39,139 @@
                     }
                 },
                 "summary": "Get all games"
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Games"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "Game to be created - without ID",
+                        "schema": {
+                            "$ref": "#/definitions/NewGame"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created game",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": 15,
+                                "name": "some text",
+                                "developer": "some text",
+                                "releaseDate": "2018-02-10T09:30Z",
+                                "price": 86.27
+                            }
+                        }
+                    }
+                },
+                "summary": "Create game"
             }
+        },
+        "/games/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Games"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Return the requested Game details\n",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "id": 20,
+                                "name": "some text",
+                                "developer": "some text",
+                                "releaseDate": "2018-02-10T09:30Z",
+                                "price": 76.94
+                            }
+                        }
+                    }
+                },
+                "summary": "Get a game"
+            },
+            "put": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Games"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "Game with data to be updated",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        },
+                        "in": "body",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Game updated",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    }
+                },
+                "summary": "Update game with given values"
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Games"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Game deleted"
+                    },
+                    "404": {
+                        "description": "Game not found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "error": "Game not found"
+                            }
+                        }
+                    }
+                },
+                "summary": "Delete game"
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "number"
+                }
+            ]
         }
     },
     "definitions": {
@@ -59,6 +191,86 @@
             "example": {
                 "id": 1,
                 "name": "Minecraft"
+            }
+        },
+        "Game": {
+            "title": "Root Type for Game",
+            "description": "",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "developer": {
+                    "type": "string"
+                },
+                "releaseDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "price": {
+                    "format": "double",
+                    "type": "number"
+                }
+            },
+            "example": {
+                "id": 1,
+                "name": "Minecraft",
+                "developer": "Mojang",
+                "releaseDate": "2011-11-18T00:00:00.000Z",
+                "price": 29.99
+            }
+        },
+        "Error": {
+            "title": "Root Type for Error",
+            "description": "",
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "error": "Error message"
+            }
+        },
+        "NewGame": {
+            "title": "Root Type for Game",
+            "description": "",
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "description": "Required, unique",
+                    "type": "string"
+                },
+                "developer": {
+                    "description": "Optional",
+                    "type": "string"
+                },
+                "releaseDate": {
+                    "format": "date-time",
+                    "description": "Optional",
+                    "type": "string"
+                },
+                "price": {
+                    "format": "double",
+                    "description": "Optional",
+                    "type": "number"
+                }
+            },
+            "example": {
+                "id": 1,
+                "name": "Minecraft",
+                "developer": "Mojang",
+                "releaseDate": "2011-11-18T00:00:00.000Z",
+                "price": 29.99
             }
         }
     }
