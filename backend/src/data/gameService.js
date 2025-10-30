@@ -11,5 +11,22 @@ export const gameService = {
             attributes: ['id', 'name'],
         });
         return games.map(g=>g.get({ plain: true }));
+    },
+    createGame: async (name, developer, releaseDate, price) => {
+        const createdGame = await Games.create({
+            name,
+            developer,
+            releaseDate,
+            price
+        });
+        return createdGame.get({ plain: true });
+    },
+    async deleteGame(gameId) {
+        const deleteResult = await Games.destroy({
+            where: {
+                id: gameId,
+            },
+        });
+        return deleteResult !== 0;
     }
 }
