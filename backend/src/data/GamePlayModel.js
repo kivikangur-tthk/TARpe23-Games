@@ -7,6 +7,10 @@ export default (sequelize, DataTypes) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
+            playTimeMinutes: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            }
         }
     );
 }

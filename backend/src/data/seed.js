@@ -1,5 +1,5 @@
 export default async (db) => {
-    await db.Games.findOrCreate({
+    const [minecraft, gameCreated] = await db.Games.findOrCreate({
         where: {name: "Minecraft"},
         defaults: {
             name: "Minecraft",
@@ -8,4 +8,22 @@ export default async (db) => {
             price: "29.99"
         },
     });
+    console.log("Game created:", gameCreated);
+    const [opilane, userCreated] = await db.Users.findOrCreate({
+        where: {username: "opilane"},
+        defaults: {
+            username: "opilane",
+            password: "$2a$10$OjEII2iqxMpjdd8kSEZty.ZNVVqLjm1YtHDWBpqxyMstdV09XlfSy"
+        }
+    });
+    console.log("User created:", userCreated);
+    const [gamePlay, gamePlayCreated] =await db.GamePlays.findOrCreate({
+        where: { id: 1 },
+        defaults: {
+            GameId: minecraft.id,
+            UserName: opilane.username,
+            playTimeMinutes: 55,
+        }
+    });
+    console.log("Game Play created:", gamePlayCreated);
 }
