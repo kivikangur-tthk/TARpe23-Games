@@ -21,9 +21,10 @@ export default async (db) => {
         where: { id: 1 },
         defaults: {
             GameId: minecraft.id,
-            UserName: opilane.username,
+            UserUsername: opilane.username,
             playTimeMinutes: 55,
         }
     });
     console.log("Game Play created:", gamePlayCreated);
+    console.dir(gamePlay.get({plain:true}), {depth: null});
 }
