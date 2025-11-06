@@ -1,19 +1,19 @@
-import Games from "./GameModel.js";
+import { db } from "./dbConfig.js";
 export const gameService = {
     getGame: async (gameId) => {
-        const game = await Games.findByPk(gameId,{
+        const game = await db.Games.findByPk(gameId,{
             attributes: { exclude: ['createdAt', 'updatedAt'] },
         });
         return game ? game.get({ plain: true }) : undefined;
     },
     getGames: async () => {
-        const games = await Games.findAll({
+        const games = await db.Games.findAll({
             attributes: ['id', 'name'],
         });
         return games.map(g=>g.get({ plain: true }));
     },
     createGame: async (name, developer, releaseDate, price) => {
-        const createdGame = await Games.create({
+        const createdGame = await db.Games.create({
             name,
             developer,
             releaseDate,
@@ -22,7 +22,7 @@ export const gameService = {
         return createdGame.get({ plain: true });
     },
     async deleteGame(gameId) {
-        const deleteResult = await Games.destroy({
+        const deleteResult = await db.Games.destroy({
             where: {
                 id: gameId,
             },

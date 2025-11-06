@@ -1,4 +1,11 @@
-import { Sequelize } from 'sequelize';
+import {DataTypes, Sequelize} from 'sequelize';
+import GameModel from "./GameModel.js";
+import UserModel from "./UserModel.js";
+import GamePlayModel from "./GamePlayModel.js";
+import relations from "./relations.js";
+import seed from "./seed.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const isTest = process.env.NODE_ENV === 'test';
 console.log("isTest:", isTest);
@@ -24,9 +31,21 @@ const sequelize = isTest
     }
 })();
 
+const db = {};
+db.Games = GameModel(sequelize, DataTypes);
+db.Users = UserModel(sequelize, DataTypes);
+db.GamePlays = GamePlayModel(sequelize, DataTypes);
+relations(db);
+
 const sync = (async () => {
     await sequelize.sync({ alter: true });
     console.log("All models were synchronized.");
 })
 
-export { sequelize, sync };
+if (process.env.DB_SYNC === "true") {
+    await sync();
+    if (process.env.DB_SEED === "true") {
+        await seed(db);
+    }
+}
+export { sequelize, sync, db };
