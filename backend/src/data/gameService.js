@@ -6,7 +6,6 @@ export const gameService = {
             where: {
                 id: gameId
             },
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
             include: {
                 model: Users,
                 as: "Players"

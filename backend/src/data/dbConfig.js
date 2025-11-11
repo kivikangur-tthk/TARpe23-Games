@@ -1,4 +1,4 @@
-import {DataTypes, Sequelize} from 'sequelize';
+import { DataTypes, Sequelize } from 'sequelize';
 import GameModel from "./GameModel.js";
 import UserModel from "./UserModel.js";
 import GamePlayModel from "./GamePlayModel.js";
@@ -14,12 +14,26 @@ const sequelize = isTest
     ? new Sequelize({
         dialect: "sqlite",
         storage: ':memory',
-        logging: false
+        logging: false,
+        define: {
+            defaultScope: {
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            }
+        }
     })
     : new Sequelize({
         dialect: 'sqlite',
         storage: process.env.DB_FILE,
-        logging: console.log
+        logging: console.log,
+        define: {
+            defaultScope: {
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            }
+        }
     });
 
 (async () => {
