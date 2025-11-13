@@ -15,21 +15,22 @@ export const userService = {
     },
     getUsers: async () => {
         const users = await Users.findAll({
-            attributes: ['userName'],
+            attributes: ['username'],
         });
+        console.log("FOUND USERS:", users);
         return users.map(g => g.get({plain: true}));
     },
-    updateUser: async (userName, user) => {
-        const [updatedCount, _] = await Users.update(user, {where: {userName}});
+    updateUser: async (username, user) => {
+        const [updatedCount, _] = await Users.update(user, {where: {username}});
         if (updatedCount > 0) {
-            return await Users.findByPk(userName);
+            return await Users.findByPk(username);
         }
         return null;
     },
-    deleteUser: async (userName) => {
+    deleteUser: async (username) => {
         const deleteResult = await Users.destroy({
             where: {
-                userName,
+                username,
             },
         });
         return deleteResult !== 0;

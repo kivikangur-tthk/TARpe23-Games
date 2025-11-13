@@ -1,277 +1,297 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "title": "Games API",
-        "version": "1.0",
-        "description": "### This is a Swagger UI for our Games API  \n\n### Error handling\nErrors are presented using the HTTP status codes 400-599. The response include a more detailed explanation about the error in the body.\n\n```\n{\n  \"error\": \"Cleartext explanation of the error that occurred\"\n}\n```\n\n### Generic API errors\nThese error responses can be returned by any of the described endpoints.\n\n| HTTP status  |  Description |\n|---|---|\n| 400| Bad input parameters or invalid request. More information can be found in the response body.\n| 401| The consumer does not have access to the requested resource or the provided token is not valid.\n| 404| The requested resource can not be found or the user does not have access to the resource.\n| 5XX| A server error has occurred while processing the request."
+  "swagger": "2.0",
+  "info": {
+    "title": "My Games API",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Games"
     },
-    "basePath": "/api/v1",
-    "paths": {
-        "/games": {
-            "get": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Games"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of games",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/GamesListItem"
-                            }
-                        },
-                        "examples": {
-                            "application/json": [
-                                {
-                                    "id": 5,
-                                    "name": "some text"
-                                },
-                                {
-                                    "id": 93,
-                                    "name": "some text"
-                                }
-                            ]
-                        }
-                    }
-                },
-                "summary": "Get all games"
-            },
-            "post": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Games"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "description": "Game to be created - without ID",
-                        "schema": {
-                            "$ref": "#/definitions/NewGame"
-                        },
-                        "in": "body",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created game",
-                        "schema": {
-                            "$ref": "#/definitions/Game"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "id": 15,
-                                "name": "some text",
-                                "developer": "some text",
-                                "releaseDate": "2018-02-10T09:30Z",
-                                "price": 86.27
-                            }
-                        }
-                    }
-                },
-                "summary": "Create game"
-            }
-        },
-        "/games/{id}": {
-            "get": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Games"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Return the requested Game details\n",
-                        "schema": {
-                            "$ref": "#/definitions/Game"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "id": 20,
-                                "name": "some text",
-                                "developer": "some text",
-                                "releaseDate": "2018-02-10T09:30Z",
-                                "price": 76.94
-                            }
-                        }
-                    }
-                },
-                "summary": "Get a game"
-            },
-            "put": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Games"
-                ],
-                "parameters": [
-                    {
-                        "name": "body",
-                        "description": "Game with data to be updated",
-                        "schema": {
-                            "$ref": "#/definitions/Game"
-                        },
-                        "in": "body",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Game updated",
-                        "schema": {
-                            "$ref": "#/definitions/Game"
-                        }
-                    }
-                },
-                "summary": "Update game with given values"
-            },
-            "delete": {
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Games"
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Game deleted"
-                    },
-                    "404": {
-                        "description": "Game not found",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        },
-                        "examples": {
-                            "application/json": {
-                                "error": "Game not found"
-                            }
-                        }
-                    }
-                },
-                "summary": "Delete game"
-            },
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "type": "number"
-                }
-            ]
-        }
-    },
-    "definitions": {
-        "GamesListItem": {
-            "title": "Root Type for GamesListItem",
-            "description": "",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "example": {
-                "id": 1,
-                "name": "Minecraft"
-            }
-        },
-        "Game": {
-            "title": "Root Type for Game",
-            "description": "",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "int32",
-                    "type": "integer"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "developer": {
-                    "type": "string"
-                },
-                "releaseDate": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "price": {
-                    "format": "double",
-                    "type": "number"
-                }
-            },
-            "example": {
-                "id": 1,
-                "name": "Minecraft",
-                "developer": "Mojang",
-                "releaseDate": "2011-11-18T00:00:00.000Z",
-                "price": 29.99
-            }
-        },
-        "Error": {
-            "title": "Root Type for Error",
-            "description": "",
-            "type": "object",
-            "properties": {
-                "error": {
-                    "type": "string"
-                }
-            },
-            "example": {
-                "error": "Error message"
-            }
-        },
-        "NewGame": {
-            "title": "Root Type for Game",
-            "description": "",
-            "required": [
-                "name"
-            ],
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "Required, unique",
-                    "type": "string"
-                },
-                "developer": {
-                    "description": "Optional",
-                    "type": "string"
-                },
-                "releaseDate": {
-                    "format": "date-time",
-                    "description": "Optional",
-                    "type": "string"
-                },
-                "price": {
-                    "format": "double",
-                    "description": "Optional",
-                    "type": "number"
-                }
-            },
-            "example": {
-                "id": 1,
-                "name": "Minecraft",
-                "developer": "Mojang",
-                "releaseDate": "2011-11-18T00:00:00.000Z",
-                "price": 29.99
-            }
-        }
+    {
+      "name": "Users"
     }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/v1/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userName": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{userName}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/v1/games": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "releaseDate": {
+                  "example": "any"
+                },
+                "price": {
+                  "example": "any"
+                },
+                "developer": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/v1/games/{id}": {
+      "get": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Game data to be updated...",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Minecraft"
+                },
+                "developer": {
+                  "type": "string",
+                  "example": "Mojang"
+                },
+                "releaseDate": {
+                  "type": "string",
+                  "example": "2021-11-13T00:00:00.000Z"
+                },
+                "price": {
+                  "type": "number",
+                  "example": 29.99
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Games"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
 }

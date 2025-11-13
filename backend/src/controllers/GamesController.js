@@ -1,11 +1,13 @@
 import {gameService} from "../data/gameService.js";
 
 const getAll = async (req, res) => {
+    // #swagger.tags = ['Games']
     const games =await gameService.getGames();
     return res.json(games);
 }
 
 const getById = async (req, res) => {
+    // #swagger.tags = ['Games']
     if (!req.params.id) {
         return res.status(400).send({ error: "URL does not contain ID" });
     }
@@ -17,6 +19,7 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
+    // #swagger.tags = ['Games']
     if (!req.body.name) {
         return res.status(400).send({ error: "Missing or empty required field: name" });
     }
@@ -33,6 +36,17 @@ const create = async (req, res) => {
 }
 
 const updateById = async (req, res) => {
+    // #swagger.tags = ['Games']
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Game data to be updated...',
+            schema: {
+              name: "Minecraft",
+              developer: "Mojang",
+              releaseDate: "2021-11-13T00:00:00.000Z",
+              price: 29.99,
+            }
+    } */
     if (!req.params.id) {
         return res.status(400).send({ error: "URL does not contain ID" });
     }
@@ -44,6 +58,7 @@ const updateById = async (req, res) => {
 }
 
 const deleteById = async (req, res) => {
+    // #swagger.tags = ['Games']
     if (!req.params.id) {
         return res.status(400).send({ error: "URL does not contain ID" });
     }

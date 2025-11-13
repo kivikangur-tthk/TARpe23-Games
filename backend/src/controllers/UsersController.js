@@ -2,11 +2,13 @@ import bcrypt from 'bcryptjs';
 import {userService} from "../data/userService.js";
 
 const getAll = async (req, res) => {
+    // #swagger.tags = ['Users']
     const users =await userService.getUsers();
     return res.json(users);
 }
 
 const getById = async (req, res) => {
+    // #swagger.tags = ['Users']
     if (!req.params.userName) {
         return res.status(400).send({ error: "URL does not contain userName" });
     }
@@ -18,6 +20,7 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
+    // #swagger.tags = ['Users']
     if (!req.body.userName) {
         return res.status(400).send({ error: "Missing or empty required field: userName" });
     }
@@ -30,6 +33,7 @@ const create = async (req, res) => {
 }
 
 const updateById = async (req, res) => {
+    // #swagger.tags = ['Users']
     if (!req.params.userName) {
         return res.status(400).send({ error: "URL does not contain userName" });
     }
@@ -41,6 +45,7 @@ const updateById = async (req, res) => {
 }
 
 const deleteById = async (req, res) => {
+    // #swagger.tags = ['Users']
     if (!req.params.userName) {
         return res.status(400).send({ error: "URL does not contain userName" });
     }
