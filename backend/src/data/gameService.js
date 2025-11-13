@@ -1,5 +1,6 @@
-import { db } from "./dbConfig.js";
-const { Games, Users } = db;
+import {db} from "./dbConfig.js";
+
+const {Games, Users} = db;
 export const gameService = {
     getGame: async (gameId) => {
         const game = await Games.findOne({
@@ -11,13 +12,13 @@ export const gameService = {
                 as: "Players"
             }
         });
-        return game ? game.get({ plain: true }) : undefined;
+        return game ? game.get({plain: true}) : undefined;
     },
     getGames: async () => {
         const games = await Games.findAll({
             attributes: ['id', 'name'],
         });
-        return games.map(g=>g.get({ plain: true }));
+        return games.map(g => g.get({plain: true}));
     },
     createGame: async (name, developer, releaseDate, price) => {
         const createdGame = await Games.create({
@@ -26,7 +27,14 @@ export const gameService = {
             releaseDate,
             price
         });
-        return createdGame.get({ plain: true });
+        return createdGame.get({plain: true});
+    },
+    updateGame: async (gameId, game) => {
+        const [updatedCount, _ ] = await Games.update(game, {where: {id: gameId}});
+        if (updatedCount > 0) {
+            return await Games.findByPk(gameId);
+        }
+        return null;
     },
     async deleteGame(gameId) {
         const deleteResult = await Games.destroy({
