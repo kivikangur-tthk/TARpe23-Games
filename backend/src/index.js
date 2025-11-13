@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import gameRoutes from './routes/gameRoutes.js'
 import swaggerUi from 'swagger-ui-express';
 import swaggerDoc from './docs/swagger.json' with { type: "json" };
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.get('/', async (req, res) => {
     res.status(200).type('text/html').send(`<a href="/docs">swagger</a>`);
 });
 gameRoutes(app);
+userRoutes(app);
 
 const PORT = process.env.PORT;
 
