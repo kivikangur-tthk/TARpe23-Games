@@ -5,7 +5,6 @@ const doc = {
         title: 'My Games API',
         description: 'Description'
     },
-    host: 'localhost:8000',
     tags: [{name: 'Games'}, {name: 'Users'}]
 };
 
