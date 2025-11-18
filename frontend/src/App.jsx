@@ -2,12 +2,39 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import FilterableGamesTable from "./components/game/filterableGamesTable.jsx";
 
 function App() {
   const [count, setCount] = useState(0)
-
+    const games = [
+        {
+            "id": 1,
+            "name": "Minecraft",
+            "price": 29.99,
+            "developer": "Mojang"
+        },
+        {
+            "id": 2,
+            "name": "Minecraft 1.9",
+            "price": 29.99,
+            "developer": "Mojang"
+        },
+        {
+            "id": 3,
+            "name": "Minecraft 2.12",
+            "price": 29.99,
+            "developer": "Microsoft"
+        },
+        {
+            "id": 4,
+            "name": "Minecraft Bedrock",
+            "price": 29.99,
+            "developer": "Microsoft"
+        }
+    ];
   return (
     <>
+        <FilterableGamesTable games={games} />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
