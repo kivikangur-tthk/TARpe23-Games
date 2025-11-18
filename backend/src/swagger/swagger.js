@@ -1,10 +1,13 @@
 import swaggerAutogen from 'swagger-autogen';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const doc = {
     info: {
         title: 'My Games API',
         description: 'Description'
     },
+    host: process.env.HOST+':'+process.env.PORT,
     tags: [{name: 'Games'}, {name: 'Users'}]
 };
 
