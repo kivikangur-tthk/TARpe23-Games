@@ -1,27 +1,14 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import axios from 'axios'
 import './App.css'
 import FilterableGamesTable from "./components/game/filterableGamesTable.jsx";
 
 function App() {
     const [count, setCount] = useState(0);
-    const [games, setGames] = useState([]);
-    useEffect(() => {
-        const fetchGames = async () => {
-            try {
-                const response = await axios.get(import.meta.env.VITE_BACKEND_URL + "/api/v1/games");
-                setGames(response.data);
-            } catch (error) {
-                console.log("Failed to fetch Games:", error);
-            }
-        }
-        fetchGames().then(() => console.log("Success fetching Games"));
-    }, []);
 
     return (<>
-            <FilterableGamesTable games={games}/>
+            <FilterableGamesTable />
             <div>
                 <a href="https://vite.dev" target="_blank">
                     <img src={viteLogo} className="logo" alt="Vite logo"/>
