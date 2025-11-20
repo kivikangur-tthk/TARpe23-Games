@@ -16,7 +16,7 @@ export const gameService = {
     },
     getGames: async () => {
         const games = await Games.findAll({
-            attributes: ['id', 'name'],
+            attributes: ['id', 'name', 'developer', 'price'],
         });
         return games.map(g => g.get({plain: true}));
     },

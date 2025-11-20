@@ -10,7 +10,7 @@ export default function GamesTable({ games }) {
             rows.push(
                 <DeveloperRow
                     developer={game.developer}
-                    key={game.developer} />
+                    key={game.developer ?? 'unknown'} />
             );
         }
         rows.push(
