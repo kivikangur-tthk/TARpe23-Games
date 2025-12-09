@@ -62,4 +62,4 @@ jobs:
           app-name: 'tarpe23-games'
           slot-name: 'Production'
           package: .
-          app_location: "/dist" 
+          app_location: "/frontend/dist" 
