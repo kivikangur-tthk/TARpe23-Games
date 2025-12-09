@@ -24,7 +24,7 @@
     "url": "https://github.com/kivikangur-tthk/TARpe23-Games/issues"
   },
   "homepage": "https://github.com/kivikangur-tthk/TARpe23-Games#readme",
-  "devDependencies": {
+  "dependencies": {
     "concurrently": "^9.2.1",
     "subpackage": "^1.1.0"
   },
